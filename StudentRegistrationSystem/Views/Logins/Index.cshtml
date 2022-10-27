@@ -1,0 +1,57 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/Scripts/css/login_css.css">
+    <link rel="stylesheet" href="~/Scripts/css/Navbar.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    @*https://codeseven.github.io/toastr/*@
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+    <script type="text/javascript" src="~/Scripts/js/loginScript.js"></script>
+
+    <style>
+    </style>
+</head>
+<body>
+
+    <ul>
+        <li><a href="@Url.Action("Home", "HomePage")">Home</a></li>
+        <li><a class="active"  href="#news">Login</a></li>
+ 
+    </ul>
+
+    <form action="/action_page.php">
+        <div class="container">
+            <h1>Login</h1>
+
+            <hr>
+
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="email" id="emailAddress" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" id="password" required>
+
+
+            <hr>
+
+
+            <button onclick="signIn()" type="submit" class="registerbtn" >Login </button>
+
+            <!-- <p><button class="registerbtn" onclick="window.location = '@Url.Action("RegIndex", "Reg")'">Register</button></p>-->
+        </div>
+
+        <div class="container signin">
+            <p>Don't have an account? <a href="@Url.Action("RegIndex", "Reg")">Register</a>.</p>
+        </div>
+    </form>
+
+</body>
+</html>
