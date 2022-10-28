@@ -1,4 +1,4 @@
-﻿using StudentRegistrationSystem.Entities;
+﻿using StudentRegistrationSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace StudentRegistrationSystem.BusinessLogic
 {
     public interface IManageStudent
     {
-        bool CreateStudent(User user);
-       
+        string GetEnrollmentStatus();
+        string GetStudentResult();
     }
 }

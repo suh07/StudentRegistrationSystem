@@ -8,8 +8,7 @@ namespace StudentRegistrationSystem.Controllers
 {
     public class HomePageController : Controller
     {
-        // GET: HomePage
-        public ActionResult Home()
+        public ActionResult HomePageIndex()
         {
             return View();
         }

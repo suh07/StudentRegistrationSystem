@@ -146,29 +146,26 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="BusinessLogic\AdminAccess.cs" />
+    <Compile Include="BusinessLogic\IAdminAccess.cs" />
     <Compile Include="BusinessLogic\IManageUser.cs" />
     <Compile Include="BusinessLogic\ManageUser.cs" />
     <Compile Include="BusinessLogic\IManageStudent.cs" />
     <Compile Include="BusinessLogic\ManageStudent.cs" />
-    <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
-    <Compile Include="Controllers\LoginsController.cs" />
-    <Compile Include="Controllers\RegController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="DataAccessLayer\ConnectDatabase.cs" />
     <Compile Include="DataAccessLayer\IConnectDatabase.cs" />
-    <Compile Include="DataAccessLayer\IStudentDAL.cs" />
-    <Compile Include="DataAccessLayer\IUserDAL.cs" />
-    <Compile Include="DataAccessLayer\StudentDAL.cs" />
-    <Compile Include="DataAccessLayer\UserDAL.cs" />
-    <Compile Include="Models\Entities\Guardian.cs" />
-    <Compile Include="Models\Login.cs" />
-    <Compile Include="Models\Entities\Result.cs" />
-    <Compile Include="Models\Entities\Subject.cs" />
-    <Compile Include="Models\Entities\Student.cs" />
-    <Compile Include="Models\Entities\Role.cs" />
-    <Compile Include="Models\Entities\User.cs" />
+    <Compile Include="DataAccessLayer\IManageStudentDAL.cs" />
+    <Compile Include="DataAccessLayer\IManageUserDAL.cs" />
+    <Compile Include="DataAccessLayer\ManageStudentDAL.cs" />
+    <Compile Include="DataAccessLayer\ManageUserDAL.cs" />
+    <Compile Include="Models\Result.cs" />
+    <Compile Include="Models\Subject.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -214,13 +211,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Logins\Index.cshtml" />
-    <Content Include="Views\Reg\RegIndex.cshtml" />
-    <Content Include="Views\HomePage\Home.cshtml" />
-    <Content Include="Views\Application\ApplicationForm.cshtml" />
+    <Content Include="Views\Login\LoginIndex.cshtml" />
+    <Content Include="Views\Registration\RegistrationIndex.cshtml" />
+    <Content Include="Views\HomePage\HomePageIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

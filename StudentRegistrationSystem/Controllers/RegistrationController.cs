@@ -1,6 +1,6 @@
 ﻿using StudentRegistrationSystem.BusinessLogic;
 using StudentRegistrationSystem.DataAccessLayer;
-using StudentRegistrationSystem.Entities;
+using StudentRegistrationSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +9,11 @@ using System.Web.Mvc;
 
 namespace StudentRegistrationSystem.Controllers
 {
-    public class RegController : Controller
+    public class RegistrationController : Controller
     {
-
-        // GET: Reg
-        public ActionResult RegIndex()
+        public ActionResult RegistrationIndex()
         {
             return View();
         }
-
     }
 }

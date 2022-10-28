@@ -6,19 +6,12 @@
     });
 });
 
-/*
-function register() {
-    toastr.info('Page Under construction!!');
-}
-*/
-
 function signIn() {
     var emailAddress = $("#emailAddress").val(); // read email address input
     var password = $("#password").val(); // read password input
     // create object to map LoginModel
     var authObj = { EmailAddress: emailAddress, Password: password };
-
-    
+ 
     sendData(authObj).then((response) => {
         if (response.result) {
             toastr.success("Authentication Succeed. Redirecting to relevent page.....");
@@ -33,12 +26,11 @@ function signIn() {
             toastr.error('Unable to make request!!');
         });
 }
-
 function sendData(dataObj) {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "POST",
-            url: "Logins/Auth",
+            url: "Login/Auth",
             data: dataObj,
             dataType: "json",
             success: function (result) {

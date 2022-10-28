@@ -1,4 +1,4 @@
-﻿using StudentRegistrationSystem.Entities;
+﻿using StudentRegistrationSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Data;
 namespace StudentRegistrationSystem.DataAccessLayer
 {
 
-    public class StudentDAL : IStudentDAL
+    public class ManageStudentDAL : IManageStudentDAL
     {
 
     }

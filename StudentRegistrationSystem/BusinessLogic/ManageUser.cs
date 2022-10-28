@@ -1,4 +1,4 @@
-﻿using StudentRegistrationSystem.Entities;
+﻿using StudentRegistrationSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,25 +9,21 @@ namespace StudentRegistrationSystem.BusinessLogic
 {
     public class ManageUser : IManageUser
     {
-        private readonly IUserDAL _userDAL;
+        private readonly IManageUserDAL _ManageUserDAL;
 
-        public ManageUser(IUserDAL userDAL)
+        public ManageUser(IManageUserDAL ManageUserDAL)
         {
-            _userDAL = userDAL;
+            _ManageUserDAL = ManageUserDAL;
         }
-
         public bool Authenticate(LoginModel model)
         {
-            bool isUserValid = false;
-            User validUser = _userDAL.GetUserByEmail(model.EmailAddress);
-
-            if (validUser != null)
+            bool ValidatedUser = false;
+            User validateUser = _ManageUserDAL.GetUserByEmail(model.EmailAddress);
+            if (validateUser != null)
             {
-                isUserValid=BCrypt.Net.BCrypt.Verify(model.Password, validUser.Password);
+                ValidatedUser = BCrypt.Net.BCrypt.Verify(model.Password, validateUser.Password);
             }
-
-            return isUserValid;
-
+            return ValidatedUser;
         }
     }
 }

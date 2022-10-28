@@ -18,55 +18,44 @@ function register() {
     var password = $("#password").val();  
     var date = $("#date").val();
 
-    var errorMessages = [];
+   
     // create object to map usermodel
     var userObj = {
         FirstName: firstname, LastName: lastname, NID: NID, UserAddress: address, GuardianName: guardian, PhoneNumber: phone, 
         DateOfBirth: date ,EmailAdress: email, Password : password
     };
 
-    if (errorMessages.length == 0) {
-        sendData(usertObj).then((response) => {
-            if (response.result) {
-                toastr.success("Authentication Succeed. Redirecting to relevent page.....");
-                setTimeout(redirect, 3000);
-                
-
-            }
-            else {
-                toastr.error('Unable to Register user');
-                return false;
-            }
-        })
-            .catch((error) => {
-                toastr.error('Unable to make request!!');
-            });
-    } else {
-        for (var i = 0; i < errorMessages.length; i++) {
-            toastr.error(errorMessages[i]);
+    sendData(userObj).then((response) => {
+        if (response.result) {
+            toastr.success("Authentication Succeed. Redirecting to relevent page.....");
+            window.location = response.url;
         }
+        else {
+            toastr.error('Unable to Register user');
+            return false;
+        }
+    })
+        .catch((error) => {
+            toastr.error('Unable to make request!!');
+        });
         
     }
     
-}
 
-function sendData(user) {
+
+function sendData(userObj) {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "POST",
-            url: "/RegController/CreateStudent",
-            data: user,
+            url: "Reg/CreateUser",
+            data: userObj,
             dataType: "json",
-            success: function (data) {
-                resolve(data)
+            success: function (result) {
+                resolve(result)
             },
             error: function (error) {
                 reject(error)
             }
         })
     });
-}
-
-function redirect() {
-    window.location.href = "/Logins/Index";
 }

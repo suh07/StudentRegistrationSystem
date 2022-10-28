@@ -1,4 +1,4 @@
-﻿using StudentRegistrationSystem.Entities;
+﻿using StudentRegistrationSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,18 +8,13 @@ using System.Web;
 
 namespace StudentRegistrationSystem.DataAccessLayer
 {
-    public class UserDAL : IUserDAL
+    public class ManageUserDAL : IManageUserDAL
     {
-        private readonly IConnectDatabase _connectDatabase;
+        private readonly IConnectDatabase ConnectDatabase;
 
-        public UserDAL(IConnectDatabase connectDatabase)
+        public ManageUserDAL(IConnectDatabase connectDatabase)
         {
-            _connectDatabase = connectDatabase;
-        }
-
-        public bool CreateStudent(User user)
-        {
-            throw new NotImplementedException();
+            ConnectDatabase = connectDatabase;
         }
 
         public User GetUserByEmail(string email)
@@ -28,7 +23,7 @@ namespace StudentRegistrationSystem.DataAccessLayer
             string query = @"SELECT UserId, Password FROM Users WHERE EmailAddress=@EmailAddress";
             List<SqlParameter> parameters=new List<SqlParameter>();
             parameters.Add(new SqlParameter("@EmailAddress",email));
-            DataTable result = _connectDatabase.QueryConditions(query, parameters);
+            DataTable result = ConnectDatabase.QueryConditions(query, parameters);
 
             if (result.Rows.Count > 0)
             {
@@ -37,8 +32,6 @@ namespace StudentRegistrationSystem.DataAccessLayer
                 user.EmailAddress = email;
                 user.Password = row["Password"].ToString();
             }
-
-
             return user;
         }
     }

@@ -18,10 +18,10 @@ namespace StudentRegistrationSystem
             // e.g. container.RegisterType<ITestService, TestService>();
 
             container.RegisterType<IManageUser, ManageUser>();
-            container.RegisterType<IUserDAL, UserDAL>();
+            container.RegisterType<IManageUserDAL, ManageUserDAL>();
             container.RegisterType<IManageStudent, ManageStudent>();
             container.RegisterType<IConnectDatabase, ConnectDatabase>();
-            container.RegisterType<IStudentDAL, StudentDAL>();
+            container.RegisterType<IManageStudentDAL, ManageStudentDAL>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

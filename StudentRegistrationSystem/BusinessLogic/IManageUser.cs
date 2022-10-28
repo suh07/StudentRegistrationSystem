@@ -1,4 +1,4 @@
-﻿using StudentRegistrationSystem.Entities;
+﻿using StudentRegistrationSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
