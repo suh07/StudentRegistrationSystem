@@ -5,8 +5,6 @@
         return false;
     });
 });
-
-
 function register() {
     var firstname = $("#firstname").val(); 
     var lastname = $("#lastname").val();   
@@ -23,17 +21,15 @@ function register() {
         toastr.error('Password do not match');
         return false;
     }
-    // create object to map usermodel
     var userObj = {
         FirstName: firstname, LastName: lastname, NationalId: NationalId, StudentAddress: address, GuardianName: guardianName, PhoneNumber: phoneNumber, 
-        DateOfBirth: dateOfBirth ,EmailAdress: emailAddress, UserPassword : password
+        DateOfBirth: dateOfBirth ,EmailAddress: emailAddress, UserPassword : password
     };
 
     sendData(userObj).then((response) => {
-        console.log("here");
         if (response.result) {
             toastr.success("Successfully registered");
-          
+            window.location = response.url;
         }
         else {
             toastr.error("Please provide appropriate credentials");
@@ -44,14 +40,11 @@ function register() {
             toastr.error("Something went wrong, Please try again!");
         });
 }
-
-
-
 function sendData(userCredential) {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "POST",
-            url: "Registration/AddUser",
+            url: "/Registration/AddUser",
             data: userCredential,
             dataType: "json",
             success: function (data) {
@@ -63,39 +56,3 @@ function sendData(userCredential) {
         })
     });
 }
-    /*
-    sendData(userObj).then((response) => {
-        console.log("here");
-        if (response.result) {
-            toastr.success("Authentication Succeed. Redirecting to relevent page.....");
-            window.location = response.url;
-        }
-        else {
-            toastr.error('Unable to Register user');
-            return false;
-        }
-    })
-        .catch((error) => {
-            toastr.error('Unable to make request!!');
-        });
-        
-    }
-    
-
-
-function sendData(userObj) {
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            type: "POST",
-            url: "/Registration/AddUser",
-            data: userObj,
-            dataType: "json",
-            success: function (result) {
-                resolve(data)
-            },
-            error: function (result) {
-                reject(error)
-            }
-        })
-    });
-}*/

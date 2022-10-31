@@ -33,7 +33,8 @@ namespace StudentRegistrationSystem.DataAccessLayer
             if (result.Rows.Count > 0)
             {
                 DataRow row=result.Rows[0];
-                user= new User((int)row["UserId"]);
+                user = new User();
+                user.UserId = (int)row["UserId"];
                 user.EmailAddress = email;
                 user.UserPassword = row["UserPassword"].ToString();
             }
@@ -68,24 +69,21 @@ namespace StudentRegistrationSystem.DataAccessLayer
             return ConnectDatabase.InsertData(AddUserQuery, parameters);
         }
 
-        public bool CheckExistedUser(String EmailAddress)
+        public bool CheckExistedUser(string emailAddress)
         {
-            string query = @"SELECT EmailAddress from Users WHERE EmailAddress=@EmailAddress";
+            string query = @"SELECT EmailAddress from Users WHERE EmailAddress = @email";
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@EmailAddress", EmailAddress));
+            parameters.Add(new SqlParameter("@email", emailAddress));
 
             DataTable result = ConnectDatabase.QueryConditions(query, parameters);
 
-            if(result.Rows.Count > 0)
-            {
-                return true;
-            }
-            return false;
+            return result.Rows.Count > 0;
         }
         public List<User> GetAllUser(User user)
         {
             List<User> userList = null;
-            var dt = ConnectDatabase.GetUserDetails(GetUserQuery);
+            DataTable dt = ConnectDatabase.GetUserDetails(GetUserQuery);
+
             if (dt.Rows.Count > 0)
             {
                   userList = new List<User>();
@@ -109,29 +107,21 @@ namespace StudentRegistrationSystem.DataAccessLayer
 
         public bool AddUserDB(User user)
         {
-            string PasswordHashed = BCrypt.Net.BCrypt.HashPassword(user.UserPassword);
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(user.UserPassword);
 
             List<SqlParameter> parameters = new List<SqlParameter>();
-
            
             string RoleName = "Student";
-            string query = @"INSERT INTO Users(RoleName, RoleId,EmailAddress, UserPassword)" + "VALUES(@RoleName,@RoleId,@EmailAddress, @UserPassword)";
+            string query = @"INSERT INTO Users(RoleName, RoleId, EmailAddress, UserPassword) 
+                             VALUES (@RoleName, @RoleId, @EmailAddress, @Password)";
             parameters.Add(new SqlParameter("@RoleId", Role.Student));
             parameters.Add(new SqlParameter("@RoleName", RoleName));
             parameters.Add(new SqlParameter("@EmailAddress", user.EmailAddress));
-            parameters.Add(new SqlParameter("@Password", PasswordHashed));
+            parameters.Add(new SqlParameter("@Password", passwordHash));
 
-            ConnectDatabase.InsertData(query, parameters);
-           
             DataTable result = ConnectDatabase.QueryConditions(query, parameters);
 
-            if(result.Rows.Count > 0)
-            {
-                return true;
-            }
-            return false;
-
-
+            return result.Rows.Count > 0;
         }
     }
 }

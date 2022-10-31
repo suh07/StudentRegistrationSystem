@@ -19,12 +19,28 @@ namespace StudentRegistrationSystem.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public JsonResult Auth(LoginModel model)
         {
-            var IsAuthenticationValid = false;
-            IsAuthenticationValid = _ManageUser.Authenticate(model);
-            return Json(new { result = IsAuthenticationValid, url = "/HomePage/HomePageIndex" });
+            User user = _ManageUser.Authenticate(model);
+
+            if (user == null)
+            {
+                return Json(new { result = false });
+            }
+
+            Session["userId"] = user.UserId;
+
+            return Json(new { result = true, url = "/HomePage/HomePageIndex" });
+        }
+
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            Session["userId"] = null;
+
+            return RedirectToAction("LoginIndex");
         }
     }
 }

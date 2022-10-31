@@ -30,13 +30,15 @@ namespace StudentRegistrationSystem.DataAccessLayer
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.CommandType = CommandType.Text;
+
                     if (parameters != null)
                     {
-                        parameters.ForEach(parameter =>
+                        foreach (SqlParameter parameter in parameters)
                         {
-                            command.Parameters.AddWithValue(parameter.ParameterName, parameter.Value);
-                        });
+                            command.Parameters.Add(parameter);
+                        }
                     }
+
                     using (SqlDataAdapter sqlData = new SqlDataAdapter(command))
                     {
                         sqlData.Fill(data);

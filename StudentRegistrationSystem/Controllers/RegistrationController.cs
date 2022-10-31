@@ -7,16 +7,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-
 namespace StudentRegistrationSystem.Controllers
 {
-
     public class RegistrationController : Controller
     {
-        private readonly IManageUser _ManageUser;
+        private readonly IManageUser _manageUser;
         public RegistrationController(IManageUser manageUser)
         {
-            _ManageUser = manageUser;
+            _manageUser = manageUser;
         }
         public ActionResult RegistrationIndex()
         {
@@ -25,10 +23,9 @@ namespace StudentRegistrationSystem.Controllers
         [HttpPost]
         public JsonResult AddUser(User User)
         {
-            //var response = _ManageUser.AddUser(User);
+            bool userAdded = _manageUser.AddUser(User);
 
-            bool isUserAdded = _ManageUser.AddUser(User);
-            return Json(new { result = isUserAdded, url = Url.Action("LoginIndex","User") });
+            return Json(new { result = userAdded, url = Url.Action("LoginIndex", "Login") });
         }
     }
 }

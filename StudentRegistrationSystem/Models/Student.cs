@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Web;
 
 namespace StudentRegistrationSystem.Models
@@ -17,5 +18,15 @@ namespace StudentRegistrationSystem.Models
         public DateTime DateOfBirth { get; set; }
         public string StudentStatus { get; set; }
         public List<Subject> subjects { get; set; }
+        public List<Result> result { get; set; }
+        public Student()
+        {
+            result = new List<Result>();
+        }
+
+        public class resultModel
+        {
+            public List<Result> result { get; set; }
+        }
     }
 }

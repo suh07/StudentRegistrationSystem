@@ -11,5 +11,6 @@ namespace StudentRegistrationSystem.BusinessLogic
     {
         string GetEnrollmentStatus();
         string GetStudentResult();
+        bool AddStudentResult(List<Result> result, int userId);
     }
 }

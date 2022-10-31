@@ -10,6 +10,11 @@ namespace StudentRegistrationSystem.Controllers
     {
         public ActionResult HomePageIndex()
         {
+            if (Session["userId"] == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.Unauthorized);
+            }
+
             return View();
         }
     }
