@@ -15,6 +15,7 @@ namespace StudentRegistrationSystem.Models
         public string GuardianName { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public string StudentStatus { get; set; }
         public List<Subject> subjects { get; set; }
     }
 }

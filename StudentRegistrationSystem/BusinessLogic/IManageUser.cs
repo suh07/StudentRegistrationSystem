@@ -10,5 +10,6 @@ namespace StudentRegistrationSystem.BusinessLogic
     public interface IManageUser
     {
         bool Authenticate(LoginModel model);
+        bool AddUser(User User);
     }
 }

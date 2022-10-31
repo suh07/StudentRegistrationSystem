@@ -10,10 +10,10 @@ namespace StudentRegistrationSystem.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly IManageUser _manageUser;
+        private readonly IManageUser _ManageUser;
         public LoginController(IManageUser manageUser)
         {
-            _manageUser = manageUser;
+            _ManageUser = manageUser;
         }
         public ActionResult LoginIndex()
         {
@@ -23,7 +23,7 @@ namespace StudentRegistrationSystem.Controllers
         public JsonResult Auth(LoginModel model)
         {
             var IsAuthenticationValid = false;
-            IsAuthenticationValid = _manageUser.Authenticate(model);
+            IsAuthenticationValid = _ManageUser.Authenticate(model);
             return Json(new { result = IsAuthenticationValid, url = "/HomePage/HomePageIndex" });
         }
     }

@@ -10,7 +10,7 @@ function signIn() {
     var emailAddress = $("#emailAddress").val(); // read email address input
     var password = $("#password").val(); // read password input
     // create object to map LoginModel
-    var authObj = { EmailAddress: emailAddress, Password: password };
+    var authObj = { EmailAddress: emailAddress, UserPassword: password };
  
     sendData(authObj).then((response) => {
         if (response.result) {

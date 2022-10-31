@@ -14,7 +14,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
-    <script type="text/javascript" src="~/Scripts/js/loginScript.js"></script>
+    <script type="text/javascript" src="~/Scripts/js/Register.js"></script>
 
     <style>
     </style>
@@ -23,13 +23,13 @@
 
     <ul>
         <li><a href="@Url.Action("HomePageIndex", "HomePage")">Home</a></li>
-        <li><a class="active"  href="#news">Login</a></li>
- 
+        <li><a class="active" href="#news">Login</a></li>
+
     </ul>
 
-    <form action="/action_page.php">
+    <form onsubmit="Register()" method="post">
         <div class="container">
-            <h1>Login</h1>
+            <h1>Register</h1>
 
             <hr>
 
@@ -39,13 +39,11 @@
             <label for="psw"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="password" id="password" required>
 
+            <label for="psw"><b>Re-Enter Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" id="password2" required>
 
             <hr>
-
-
-            <button onclick="signIn()" type="submit" class="registerbtn" >Login </button>
-
-            <!-- <p><button class="registerbtn" onclick="window.location = '@Url.Action("RegistrationIndex", "Reg")'">Register</button></p>-->
+            <input class="registerbtn" type="submit">register</input>
         </div>
 
         <div class="container signin">

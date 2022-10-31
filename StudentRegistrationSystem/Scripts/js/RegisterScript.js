@@ -8,24 +8,64 @@
 
 
 function register() {
-    var firstname = $("#name").val(); 
+    var firstname = $("#firstname").val(); 
     var lastname = $("#lastname").val();   
-    var NID = $("#NID").val(); 
+    var NationalId = $("#NationalId").val(); 
     var address = $("#address").val();
-    var phone = $("#phone").val(); 
-    var guardian = $("#guardian").val(); 
-    var email = $("#email").val(); 
+    var phoneNumber = $("#phoneNumber").val(); 
+    var guardianName = $("#guardianName").val(); 
+    var dateOfBirth = $("#dateOfBirth").val();
+    var emailAddress = $("#emailAddress").val(); 
     var password = $("#password").val();  
-    var date = $("#date").val();
+    var password2 = $("#password2").val();  
 
-   
+    if (password != password2) {
+        toastr.error('Password do not match');
+        return false;
+    }
     // create object to map usermodel
     var userObj = {
-        FirstName: firstname, LastName: lastname, NID: NID, UserAddress: address, GuardianName: guardian, PhoneNumber: phone, 
-        DateOfBirth: date ,EmailAdress: email, Password : password
+        FirstName: firstname, LastName: lastname, NationalId: NationalId, StudentAddress: address, GuardianName: guardianName, PhoneNumber: phoneNumber, 
+        DateOfBirth: dateOfBirth ,EmailAdress: emailAddress, UserPassword : password
     };
 
     sendData(userObj).then((response) => {
+        console.log("here");
+        if (response.result) {
+            toastr.success("Successfully registered");
+          
+        }
+        else {
+            toastr.error("Please provide appropriate credentials");
+         
+        }
+    })
+        .catch((error) => {
+            toastr.error("Something went wrong, Please try again!");
+        });
+}
+
+
+
+function sendData(userCredential) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: "POST",
+            url: "Registration/AddUser",
+            data: userCredential,
+            dataType: "json",
+            success: function (data) {
+                resolve(data)
+            },
+            error: function (error) {
+                reject(error)
+            }
+        })
+    });
+}
+    /*
+    sendData(userObj).then((response) => {
+        console.log("here");
         if (response.result) {
             toastr.success("Authentication Succeed. Redirecting to relevent page.....");
             window.location = response.url;
@@ -47,15 +87,15 @@ function sendData(userObj) {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "POST",
-            url: "Reg/CreateUser",
+            url: "/Registration/AddUser",
             data: userObj,
             dataType: "json",
             success: function (result) {
-                resolve(result)
+                resolve(data)
             },
-            error: function (error) {
+            error: function (result) {
                 reject(error)
             }
         })
     });
-}
+}*/
