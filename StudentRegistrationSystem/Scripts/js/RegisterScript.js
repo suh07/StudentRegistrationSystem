@@ -6,24 +6,34 @@
     });
 });
 function register() {
-    var firstname = $("#firstname").val(); 
-    var lastname = $("#lastname").val();   
-    var NationalId = $("#NationalId").val(); 
+    var firstname = $("#firstname").val();
+    var lastname = $("#lastname").val();
+    var NationalId = $("#nationalId").val();
     var address = $("#address").val();
-    var phoneNumber = $("#phoneNumber").val(); 
-    var guardianName = $("#guardianName").val(); 
+    var phoneNumber = $("#phoneNumber").val();
+    var guardianName = $("#guardianName").val();
     var dateOfBirth = $("#dateOfBirth").val();
-    var emailAddress = $("#emailAddress").val(); 
-    var password = $("#password").val();  
-    var password2 = $("#password2").val();  
+    var emailAddress = $("#emailAddress").val();
+    var password = $("#password").val();
+    var password2 = $("#password2").val();
 
     if (password != password2) {
         toastr.error('Password do not match');
         return false;
     }
+
     var userObj = {
-        FirstName: firstname, LastName: lastname, NationalId: NationalId, StudentAddress: address, GuardianName: guardianName, PhoneNumber: phoneNumber, 
-        DateOfBirth: dateOfBirth ,EmailAddress: emailAddress, UserPassword : password
+        Student: {
+            FirstName: firstname,
+            LastName: lastname,
+            NationalId: NationalId,
+            StudentAddress: address,
+            GuardianName: guardianName,
+            PhoneNumber: phoneNumber,
+            DateOfBirth: dateOfBirth
+        },
+        EmailAddress: emailAddress,
+        UserPassword: password,
     };
 
     sendData(userObj).then((response) => {
@@ -33,7 +43,7 @@ function register() {
         }
         else {
             toastr.error("Please provide appropriate credentials");
-         
+
         }
     })
         .catch((error) => {

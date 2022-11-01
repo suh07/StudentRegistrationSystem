@@ -3,18 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Web;
 
 namespace StudentRegistrationSystem.DataAccessLayer
 {
     public class ManageUserDAL : IManageUserDAL
     {
-        private const string AddUserQuery = @"Insert into Student
-        ([UserId],[FirstName],[LastName],[GuardianName],[NationalId],[DateOfBirth],  [StudentAddress],[PhoneNumber], [StudentStatus])
-        values ( @UserId , @FirstName, @LastName,@GuardianName,@NationalId, @DateOfBirth, @StudentAddress,@PhoneNumber, @Status)";
-
         private const string GetUserQuery = @"Select [NationalID],[FirstName],[LastName], [PhoneNumber], [DateOfBirth], [GuardianName], [StudentAddress],[EmailAddress] from Student,Users;";
         private readonly IConnectDatabase ConnectDatabase;
 
@@ -26,13 +19,13 @@ namespace StudentRegistrationSystem.DataAccessLayer
         {
             User user = null;
             string query = @"SELECT UserId, UserPassword FROM Users WHERE EmailAddress=@EmailAddress";
-            List<SqlParameter> parameters=new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@EmailAddress",email));
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@EmailAddress", email));
             DataTable result = ConnectDatabase.QueryConditions(query, parameters);
 
             if (result.Rows.Count > 0)
             {
-                DataRow row=result.Rows[0];
+                DataRow row = result.Rows[0];
                 user = new User();
                 user.UserId = (int)row["UserId"];
                 user.EmailAddress = email;
@@ -40,35 +33,6 @@ namespace StudentRegistrationSystem.DataAccessLayer
             }
             return user;
         }
-        public bool AddUser(User user)
-        {
-            List<SqlParameter> parameters = new List<SqlParameter>();
-
-            string Status = "Waiting";
-            int UserId = 0;
-            string query = @"INSERT INTO Users(RoleName, RoleId,EmailAddress, UserPassword)" + "VALUES(@RoleName,@RoleId,@EmailAddress, @UserPassword)";
-            parameters.Add(new SqlParameter("@EmailAddress", user.EmailAddress));
-            parameters.Add(new SqlParameter("@Password", user.UserPassword));
-            ConnectDatabase.InsertData(query, parameters);
-            query = "SELECT UserId FROM Users WHERE EmailAddress=@EmailAddress";
-            DataTable result = ConnectDatabase.QueryConditions(query, parameters);
-            UserId = (int)result.Rows[0]["UserId"];
-
-            parameters = new List<SqlParameter>();
-
-            parameters.Add(new SqlParameter("@NationalID", user.Student.NationalId));
-            parameters.Add(new SqlParameter("@FirstName", user.Student.FirstName));
-            parameters.Add(new SqlParameter("@LastName", user.Student.LastName));
-            parameters.Add(new SqlParameter("@PhoneNumber", user.Student.PhoneNumber));
-            parameters.Add(new SqlParameter("@DateOfBirth", user.Student.DateOfBirth));
-            parameters.Add(new SqlParameter("@GuardianName", user.Student.GuardianName));
-            parameters.Add(new SqlParameter("@StudentAddress", user.Student.StudentAddress));
-            parameters.Add(new SqlParameter("@UserId", UserId));
-            parameters.Add(new SqlParameter("@StudentStatus", Status));
-
-            return ConnectDatabase.InsertData(AddUserQuery, parameters);
-        }
-
         public bool CheckExistedUser(string emailAddress)
         {
             string query = @"SELECT EmailAddress from Users WHERE EmailAddress = @email";
@@ -86,7 +50,7 @@ namespace StudentRegistrationSystem.DataAccessLayer
 
             if (dt.Rows.Count > 0)
             {
-                  userList = new List<User>();
+                userList = new List<User>();
                 foreach (DataRow row in dt.Rows)
                 {
                     user.Student.FirstName = row["FirstName"].ToString();
@@ -107,17 +71,57 @@ namespace StudentRegistrationSystem.DataAccessLayer
 
         public bool AddUserDB(User user)
         {
+            if (!InsertUser(user))
+            {
+                return false;
+            }
+
+            return InsertStudent(user.Student, user.UserId);
+        }
+
+        private bool InsertUser(User user)
+        {
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(user.UserPassword);
+            string query = @"
+                INSERT INTO Users(RoleName, RoleId, EmailAddress, UserPassword) 
+                OUTPUT INSERTED.UserId
+                VALUES (@RoleName, @RoleId, @EmailAddress, @Password)";
 
             List<SqlParameter> parameters = new List<SqlParameter>();
-           
-            string RoleName = "Student";
-            string query = @"INSERT INTO Users(RoleName, RoleId, EmailAddress, UserPassword) 
-                             VALUES (@RoleName, @RoleId, @EmailAddress, @Password)";
+            parameters.Add(new SqlParameter("@RoleName", "Student"));
             parameters.Add(new SqlParameter("@RoleId", Role.Student));
-            parameters.Add(new SqlParameter("@RoleName", RoleName));
             parameters.Add(new SqlParameter("@EmailAddress", user.EmailAddress));
             parameters.Add(new SqlParameter("@Password", passwordHash));
+
+            DataTable result = ConnectDatabase.QueryConditions(query, parameters);
+
+            if (result.Rows.Count > 0)
+            {
+                user.UserId = (int)result.Rows[0]["UserId"];
+
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool InsertStudent(Student student, int userId)
+        {
+            string query = @"
+                INSERT INTO Student ([UserId],[FirstName],[LastName],[GuardianName],[NationalId],[DateOfBirth], [StudentAddress],[PhoneNumber], [StudentStatus])
+                VALUES (@UserId, @FirstName, @LastName, @GuardianName, @NationalId, @DateOfBirth, @StudentAddress,@PhoneNumber, @StudentStatus)";
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            parameters.Add(new SqlParameter("@UserId", userId));
+            parameters.Add(new SqlParameter("@FirstName", student.FirstName));
+            parameters.Add(new SqlParameter("@LastName", student.LastName));
+            parameters.Add(new SqlParameter("@GuardianName", student.GuardianName));
+            parameters.Add(new SqlParameter("@NationalId", student.NationalId));
+            parameters.Add(new SqlParameter("@DateOfBirth", student.DateOfBirth));
+            parameters.Add(new SqlParameter("@StudentAddress", student.StudentAddress));
+            parameters.Add(new SqlParameter("@PhoneNumber", student.PhoneNumber));
+            parameters.Add(new SqlParameter("@StudentStatus", "Waiting"));
 
             DataTable result = ConnectDatabase.QueryConditions(query, parameters);
 
