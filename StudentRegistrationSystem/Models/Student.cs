@@ -23,10 +23,10 @@ namespace StudentRegistrationSystem.Models
         {
             result = new List<Result>();
         }
+    }
 
-        public class resultModel
-        {
-            public List<Result> result { get; set; }
-        }
+    public class ResultModel
+    {
+        public Result[] Results { get; set; }
     }
 }

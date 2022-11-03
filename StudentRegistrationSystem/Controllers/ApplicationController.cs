@@ -18,13 +18,21 @@ namespace StudentRegistrationSystem.Controllers
         }
         public ActionResult ApplicationIndex()
         {
+            //int ses = (int)Session["userId"];
+
+           /*
+           if (Session["userId"] == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.Unauthorized);
+            }
+            */
             return View();
         }
         [HttpPost]
-        public JsonResult AddStudentResult(resultModel result)
+        public JsonResult AddStudentResult(ResultModel result)
         {
-            var Response = _ManageStudent.AddStudentResult(result.result, (int)Session["userId"]);
-            return Json(new { result = Response });
+            var response = _ManageStudent.AddStudentResult(new List<Result>(result.Results), (int)Session["userId"]);
+            return Json(new { result = response });
         }
     }
 }

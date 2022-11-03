@@ -18,10 +18,8 @@ namespace StudentRegistrationSystem.BusinessLogic
         {
             bool isResultAdded = false;
 
-            foreach(Result result in resultList)
-            {
                 isResultAdded = _ManageStudentDAL.isResultAdded(resultList, userId);
-            }
+      
 
             return isResultAdded;
         }

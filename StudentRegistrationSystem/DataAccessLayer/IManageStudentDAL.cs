@@ -9,6 +9,9 @@ namespace StudentRegistrationSystem.DataAccessLayer
 {
     public interface IManageStudentDAL
     {
+
         bool isResultAdded(List<Result> listOfResults, int userId);
+    
+      
     }
 }

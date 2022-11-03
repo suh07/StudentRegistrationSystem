@@ -1,25 +1,33 @@
-﻿$("#submit").click(function()
-{
+﻿
+$(function () {
+    let form = document.querySelector('form');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        return false;
+    });
+});
+
+function registerResult() { 
     var resultList = [];
-    
-    var subjectValue = $('.subject1Name' +' :selected').val();
-    var gradeValue = $('.subject1Grade' + ' :selected').val();
-        const result1 = { SubjectId: subjectValue, Grade: gradeValue };
+
+    var subjectValue1 = parseInt($("#subject1Name").val());
+    var gradeValue1 = $("#subject1Grade").val();
+    const result1 = { SubjectId: subjectValue1, SubjectGrade: gradeValue1 };
     resultList.push(result1);
 
-    var subjectValue = $('.subject2Name' + ' :selected').val();
-    var gradeValue = $('.subject2Grade' + ' :selected').val();
-    const result2 = { SubjectId: subjectValue, Grade: gradeValue };
+    var subjectValue2 = parseInt($("#subject2Name").val());
+    var gradeValue2 = $("#subject2Grade").val();
+    const result2 = { SubjectId: subjectValue2, SubjectGrade: gradeValue2 };
     resultList.push(result2);
 
-    var subjectValue = $('.subject3Name' + ' :selected').val();
-    var gradeValue = $('.subject3Grade' + ' :selected').val();
-    const result3 = { SubjectId: subjectValue, Grade: gradeValue };
+    var subjectValue3 = parseInt($("#subject3Name").val());
+    var gradeValue3 = $("#subject3Grade").val();
+    const result3 = { SubjectId: subjectValue3, SubjectGrade: gradeValue3 };
     resultList.push(result3);
 
+    var data = { Results: resultList };
 
-   
-    CreateResult({ results: resultList }).then((response) => {
+    CreateResult(data).then((response) => {
         if (response.result) {
             toastr.success('Result Created Successfully')
         }
@@ -31,19 +39,17 @@
         toastr.error('Unable to create result!');
         console.error(error);
     });
-
-
-
-});
+};
 
 
 function CreateResult(resultList) {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "POST",
-            url: "/Application/AddResult",
-            data: resultList,
+            url: "/Application/AddStudentResult",
+            data: JSON.stringify(resultList),
             dataType: 'json',
+            contentType: 'application/json',
             success: function (data) {
                 resolve(data)
             },
