@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/Scripts/css/HomePage.css">
+    <link rel="stylesheet" href="~/Scripts/css/Navbar.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    </style>
+</head>
+<body>
+    <h1>ADMIN PAGE</h1>
+    <ul>
+        <li><a class="active" href="/HomePage/HomePageIndex">Home</a></li>
+        <li><a href="@Url.Action("Logout", "Login")">Logout</a></li>
+        <li><a href="/Application/ApplicationIndex">Enrollment Form</a></li>
+    </ul>
+
+
+
+</body>
+</html>

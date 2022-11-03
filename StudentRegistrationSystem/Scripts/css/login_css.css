@@ -1,6 +1,14 @@
 ﻿body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: black;
+
+        background-image: url("/Scripts/Image/uniBackground.jpg");
+    color: white;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 1000px;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 * {
@@ -11,7 +19,20 @@
 .container {
     padding: 16px;
     background-color: white;
+    width: 65%;
+    margin-top: 164px;
+    margin-left: 295px;
 }
+
+    .container #formTitle {
+        color: black;
+        margin-left: 46%;
+    }
+
+    .container #register_link {
+        color: black;
+        margin-left: 32%;
+    }
 
 /* Full-width input fields */
 input[type=text], input[type=password] {

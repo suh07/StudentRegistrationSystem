@@ -18,7 +18,7 @@ namespace StudentRegistrationSystem.DataAccessLayer
         public User GetUserByEmail(string email)
         {
             User user = null;
-            string query = @"SELECT UserId, UserPassword FROM Users WHERE EmailAddress=@EmailAddress";
+            string query = @"SELECT UserId, UserPassword, RoleId FROM Users WHERE EmailAddress=@EmailAddress";
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@EmailAddress", email));
             DataTable result = ConnectDatabase.QueryConditions(query, parameters);
@@ -30,6 +30,8 @@ namespace StudentRegistrationSystem.DataAccessLayer
                 user.UserId = (int)row["UserId"];
                 user.EmailAddress = email;
                 user.UserPassword = row["UserPassword"].ToString();
+                user.RoleId = row["RoleId"].ToString();
+
             }
             return user;
         }

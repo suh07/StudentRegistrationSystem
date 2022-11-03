@@ -27,10 +27,10 @@
 
     <form action="/action_page.php">
         <div class="container">
-            <h1>Register</h1>
+
 
             <hr>
-
+            <h1 id="formTitle">Login</h1>
             <label for="fname"><b>First Name</b></label>
             <input type="text" id="firstname" name="firstname" placeholder="Your first name..">
 
@@ -50,10 +50,10 @@
             <input type="text" placeholder="Enter Guardian Name" name="guardianName" id="guardianName" required>
 
             <label for="dob"><b>Date of Birth</b></label>
-            <input type="date"  name="dateOfBirth" id="dateOfBirth" required>
+            <input type="date" name="dateOfBirth" id="dateOfBirth" required>
 
             <label for="emailAddress"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="emailAddress" id="emailAddress"  onchange="EmailValidation(this);" required>
+            <input type="text" placeholder="Enter Email" name="emailAddress" id="emailAddress" onchange="EmailValidation(this);" required>
 
             <label for="psw"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="psw" id="password" required>
@@ -64,11 +64,10 @@
             <hr>
 
             <button onclick="register()" type="submit" class="registerbtn">Register </button>
+            <p id="register_link">Already have an account? <a href="/Login/LoginIndex">Login</a>.</p>
         </div>
 
-        <div class="container signin">
-            <p>Already have an account? <a href="/Login/LoginIndex">Login</a>.</p>
-        </div>
+   
     </form>
 
 </body>

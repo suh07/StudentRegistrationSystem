@@ -30,9 +30,25 @@ namespace StudentRegistrationSystem.Controllers
                 return Json(new { result = false });
             }
 
-            Session["userId"] = user.UserId;
+          //  Session["userId"] = user.UserId;
 
-            return Json(new { result = true, url = "/HomePage/HomePageIndex" });
+            if (user.RoleId == "2")
+            {
+                Session["userId"] = user.UserId;
+                return Json(new { result = true, url = "/HomePage/HomePageIndex" });
+            }
+
+            if (user.RoleId == "1")
+            {
+                Session["userId"] = user.UserId;
+                return Json(new { result = true, url = "/Admin/AdminIndex" });
+            }
+
+
+            Session["userId"] = user.UserId;
+            return Json(new { result = true, url = "/Login/LoginIndex" });
+
+
         }
 
         [HttpGet]

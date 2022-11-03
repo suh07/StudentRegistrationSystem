@@ -1,4 +1,10 @@
 ﻿body {
-    background-color: white;
-    //background-image: url("../uniBackground.jpg");
+   
+    background-image: url("/Scripts/Image/uniBackground.jpg");
+    color: white;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 1000px;
+    background-position: center;
+    background-attachment: fixed;
 }

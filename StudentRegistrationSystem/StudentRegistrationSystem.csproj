@@ -152,6 +152,7 @@
     <Compile Include="BusinessLogic\ManageUser.cs" />
     <Compile Include="BusinessLogic\IManageStudent.cs" />
     <Compile Include="BusinessLogic\ManageStudent.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -219,6 +220,7 @@
     <Content Include="Views\Registration\RegistrationIndex.cshtml" />
     <Content Include="Views\HomePage\HomePageIndex.cshtml" />
     <Content Include="Views\Application\ApplicationIndex.cshtml" />
+    <Content Include="Views\Admin\AdminIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

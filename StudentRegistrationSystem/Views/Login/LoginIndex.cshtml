@@ -29,10 +29,10 @@
 
     <form action="/action_page.php">
         <div class="container">
-            <h1>Login</h1>
+
 
             <hr>
-
+            <h1 id="formTitle">Login</h1>
             <label for="email"><b>Email</b></label>
             <input type="text" placeholder="Enter Email" name="email" id="emailAddress" required>
 
@@ -43,14 +43,13 @@
             <hr>
 
 
-            <button onclick="signIn()" type="submit" class="registerbtn" >Login </button>
+            <button onclick="signIn()" type="submit" class="registerbtn">Login </button>
+            <p id="register_link">Don't have an account? <a href="/Registration/RegistrationIndex">Register</a>.</p>
+
+
+        </div>
 
     
-        </div>
-
-        <div class="container signin">
-            <p>Don't have an account? <a href="/Registration/RegistrationIndex">Register</a>.</p>
-        </div>
     </form>
 
 </body>
