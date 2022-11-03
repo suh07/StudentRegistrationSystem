@@ -32,7 +32,7 @@ namespace StudentRegistrationSystem.Controllers
         public JsonResult AddStudentResult(ResultModel result)
         {
             var response = _ManageStudent.AddStudentResult(new List<Result>(result.Results), (int)Session["userId"]);
-            return Json(new { result = response });
+            return Json(new { result = response, url = "/HomePage/HomePageIndex" });
         }
     }
 }

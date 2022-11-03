@@ -29,7 +29,9 @@ function registerResult() {
 
     CreateResult(data).then((response) => {
         if (response.result) {
-            toastr.success('Result Created Successfully')
+            toastr.success('Result Created Successfully');
+            window.location = response.url;
+            
         }
         else {
             toastr.error('Unable to create result');
