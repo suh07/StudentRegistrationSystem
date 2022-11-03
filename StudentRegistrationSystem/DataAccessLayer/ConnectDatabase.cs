@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Collections;
+using System.Configuration;
 
 namespace StudentRegistrationSystem.DataAccessLayer
 {
@@ -13,8 +14,8 @@ namespace StudentRegistrationSystem.DataAccessLayer
         private SqlConnection connection = null;
         private void OpenConnection()
         {
-            string connetionString = "Data Source=L-PW02X08Y;Initial Catalog=UniversityRegistrationSystem;Integrated Security=True";
-            connection = new SqlConnection(connetionString);
+            string connectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+            connection = new SqlConnection(connectionString);
             connection.Open();
         }
         private void CloseConnection()
