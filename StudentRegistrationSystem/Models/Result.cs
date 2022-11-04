@@ -10,5 +10,6 @@ namespace StudentRegistrationSystem.Models
         public int ResultId { get; set; }
         public int SubjectId { get; set; }
         public string SubjectGrade { get; set; }
+        public int GradeScore { get; set; }
     }
 }

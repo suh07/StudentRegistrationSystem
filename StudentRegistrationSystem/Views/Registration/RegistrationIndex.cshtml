@@ -5,9 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="~/Scripts/css/login_css.css">
-    <link rel="stylesheet" href="~/Scripts/css/Navbar.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     @*https://codeseven.github.io/toastr/*@
@@ -16,60 +13,133 @@
 
     <script type="text/javascript" src="~/Scripts/js/RegisterScript.js"></script>
     <script type="text/javascript" src="~/Scripts/js/validationScript.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Form</title>
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="~/Scripts/css/Admin.css">
+    <link rel="stylesheet" href="~/Scripts/css/Navbar.css">
 </head>
 <body>
 
-    <ul>
-        <li><a href="/HomePage/HomePageIndex">Home</a></li>
-        <li><a class="active" href="/Registration/RegistrationIndex">Register</a></li>
+    <div>
+        <ul>
+            <li><a href="/HomePage/HomePageIndex">Home</a></li>
+            <li><a class="active" href="/Registration/RegistrationIndex">Register</a></li>
 
-    </ul>
+        </ul>
+    </div>
 
-    <form action="/action_page.php">
-        <div class="container">
+    <div class="container">
 
+        <h1>Registration Form</h1>
 
-            <hr>
-            <h1 id="formTitle">Login</h1>
-            <label for="fname"><b>First Name</b></label>
-            <input type="text" id="firstname" name="firstname" placeholder="Your first name..">
+        <form>
+            <div class="row">
+                <div class="column">
+                    <label for="FirstName">First Name</label>
+                    <input type="text" id="firstname" name="firstname" placeholder="Your first name..">
+                </div>
+                <div class="column">
+                    <label for="LasName">Last Name</label>
+                    <input type="text" id="lastname" name="lastname" placeholder="Your last name..">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label for="nid">National ID</label>
+                    <input type="text" placeholder="Please enter NID" name="nationalId" id="nationalId" required>
+                </div>
+                <div class="column">
+                    <label for="address">Address</label>
+                    <input type="text" placeholder="Enter Address" name="address" id="address" required>
+                </div>
+            </div>
 
-            <label for="lname"><b>Last Name</b></label>
-            <input type="text" id="lastname" name="lastname" placeholder="Your last name..">
+            <div class="row">
+                <div class="column">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" placeholder="Phone Number" name="phoneNumber" id="phoneNumber" required>
+                </div>
+                <div class="column">
+                    <label for="guardian">Guardian Name</label>
+                    <input type="text" placeholder="Enter Guardian Name" name="guardianName" id="guardianName" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" name="dateOfBirth" id="dateOfBirth" required>
+                </div>
+                <div class="column">
+                    <label for="emailAddress">Email</label>
+                    <input type="text" placeholder="Enter Email" name="emailAddress" id="emailAddress" required>
+                </div>
+            </div>
 
-            <label for="nid"><b>NID</b></label>
-            <input type="text" placeholder="Please enter NID" name="nationalId" id="nationalId" required>
+            <div class="row">
+                <div class="column">
+                    <label for="psw">Password</label>
+                    <input type="password" placeholder="Enter Password" name="psw" id="password" required>
+                </div>
+                <div class="column">
+                    <label for="psw"> Confirm Password</label>
+                    <input type="password" placeholder="Enter Password" name="psw" id="password2" required>
+                </div>
+            </div>
 
-            <label for="address"><b>Address</b></label>
-            <input type="text" placeholder="Enter Address" name="address" id="address" required>
-
-            <label for="phone"><b>Phone Number</b></label>
-            <input type="text" placeholder="Phone Number" name="phoneNumber" id="phoneNumber" required>
-
-            <label for="guardian"><b>Guardian Name</b></label>
-            <input type="text" placeholder="Enter Guardian Name" name="guardianName" id="guardianName" required>
-
-            <label for="dob"><b>Date of Birth</b></label>
-            <input type="date" name="dateOfBirth" id="dateOfBirth" required>
-
-            <label for="emailAddress"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="emailAddress" id="emailAddress" onchange="EmailValidation(this);" required>
-
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" id="password" required>
-
-            <label for="psw"><b>Re-Enter Password</b></label>
-            <input type="password" placeholder="Re-Enter Password" name="psw" id="password2" required>
-
-            <hr>
-
-            <button onclick="register()" type="submit" class="registerbtn">Register </button>
+            <button onclick="register()" type="submit">Register</button>
             <p id="register_link">Already have an account? <a href="/Login/LoginIndex">Login</a>.</p>
-        </div>
+        </form>
+    </div>
+    <!--
+        <form action="/action_page.php">
+            <div class="container">
 
-   
-    </form>
 
+                <hr>
+                <h1 id="formTitle">Login</h1>
+                <label for="fname"><b>First Name</b></label>
+                <input type="text" id="firstname" name="firstname" placeholder="Your first name..">
+
+                <label for="lname"><b>Last Name</b></label>
+                <input type="text" id="lastname" name="lastname" placeholder="Your last name..">
+
+                <label for="nid"><b>NID</b></label>
+                <input type="text" placeholder="Please enter NID" name="nationalId" id="nationalId" required>
+
+                <label for="address"><b>Address</b></label>
+                <input type="text" placeholder="Enter Address" name="address" id="address" required>
+
+                <label for="phone"><b>Phone Number</b></label>
+                <input type="text" placeholder="Phone Number" name="phoneNumber" id="phoneNumber" required>
+
+                <label for="guardian"><b>Guardian Name</b></label>
+                <input type="text" placeholder="Enter Guardian Name" name="guardianName" id="guardianName" required>
+
+                <label for="dob"><b>Date of Birth</b></label>
+                <input type="date" name="dateOfBirth" id="dateOfBirth" required>
+
+                <label for="emailAddress"><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="emailAddress" id="emailAddress" onchange="EmailValidation(this);" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" id="password" required>
+
+                <label for="psw"><b>Re-Enter Password</b></label>
+                <input type="password" placeholder="Re-Enter Password" name="psw" id="password2" required>
+
+                <hr>
+
+                <button onclick="register()" type="submit" class="registerbtn">Register </button>
+                <p id="register_link">Already have an account? <a href="/Login/LoginIndex">Login</a>.</p>
+            </div>
+
+
+        </form>
+    -->
 </body>
 </html>
 

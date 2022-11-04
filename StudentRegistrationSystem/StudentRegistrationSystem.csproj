@@ -185,6 +185,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\css\Admin.css" />
     <Content Include="Scripts\css\ApplicationCss.css" />
     <Content Include="Scripts\css\HomePage.css" />
     <Content Include="Scripts\css\login_css.css" />

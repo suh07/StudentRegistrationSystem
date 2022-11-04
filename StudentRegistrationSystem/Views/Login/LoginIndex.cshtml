@@ -5,52 +5,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="~/Scripts/css/login_css.css">
-    <link rel="stylesheet" href="~/Scripts/css/Navbar.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     @*https://codeseven.github.io/toastr/*@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
     <script type="text/javascript" src="~/Scripts/js/loginScript.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Form</title>
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="~/Scripts/css/Admin.css">
+    <!-- <link rel="stylesheet" href="~/Scripts/css/login_css.css">-->
+        <link rel="stylesheet" href="~/Scripts/css/Navbar.css">
 
-    <style>
-    </style>
-</head>
-<body>
+        <style>
+        </style>
+    </head>
+    <body>
 
-    <ul>
-        <li><a href="/HomePage/HomePageIndex">Home</a></li>
-        <li><a class="active"  href="/Login/LoginIndex">Login</a></li>
- 
-    </ul>
+        <ul>
+            <li><a href="/HomePage/HomePageIndex">Home</a></li>
+            <li><a class="active" href="/Login/LoginIndex">Login</a></li>
 
-    <form action="/action_page.php">
+        </ul>
+
         <div class="container">
+            <h1>LOGIN</h1>
 
+            <form>
+                <div class="row">
+                    <div class="column">
+                        <label for="Email">Email</label>
+                        <input type="text" placeholder="Enter Email" name="email" id="emailAddress" required>
+                        <label for="Password">Password</label>
+                        <input type="password" placeholder="Enter Password" name="password" id="password" required>
+                    </div>
+                </div>
 
-            <hr>
-            <h1 id="formTitle">Login</h1>
-            <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" id="emailAddress" required>
-
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" id="password" required>
-
-
-            <hr>
-
-
-            <button onclick="signIn()" type="submit" class="registerbtn">Login </button>
-            <p id="register_link">Don't have an account? <a href="/Registration/RegistrationIndex">Register</a>.</p>
-
-
+                <button onclick="signIn()" type="submit">Submit</button>
+                <div><p id="register_link">Don't have an account? <a href="/Registration/RegistrationIndex">Register</a>.</p></div>
+               
+            </form>
         </div>
+        <!--
 
-    
-    </form>
+            <form action="/action_page.php">
+                <div class="container">
 
-</body>
+
+                    <hr>
+                    <h1 id="formTitle">Login</h1>
+                    <label for="email"><b>Email</b></label>
+                    <input type="text" placeholder="Enter Email" name="email" id="emailAddress" required>
+
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="password" id="password" required>
+
+
+                    <hr>
+
+
+                    <button onclick="signIn()" type="submit" class="registerbtn">Login </button>
+                    <p id="register_link">Don't have an account? <a href="/Registration/RegistrationIndex">Register</a>.</p>
+
+
+                </div>
+
+
+            </form>
+        -->
+    </body>
 </html>

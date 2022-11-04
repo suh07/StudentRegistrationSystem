@@ -11,7 +11,7 @@ namespace StudentRegistrationSystem.DataAccessLayer
    
     public class ManageStudentDAL : IManageStudentDAL
     {
-        private const string resultQuery = @"INSERT INTO Result ([SubjectId],[SubjectGrade],[StudentId]) VALUES (@SubjectId,@SubjectGrade,@StudentId)";
+        private const string resultQuery = @"INSERT INTO Result ([SubjectId],[SubjectGrade],[StudentId],[GradeScore]) VALUES (@SubjectId,@SubjectGrade,@StudentId,@GradeScore)";
         private readonly IConnectDatabase ConnectDatabase;
         private int userIDs;
 
@@ -30,6 +30,7 @@ namespace StudentRegistrationSystem.DataAccessLayer
                 parameters.Add(new SqlParameter("@SubjectId", result.SubjectId));
                 parameters.Add(new SqlParameter("@SubjectGrade",result.SubjectGrade));
                 parameters.Add(new SqlParameter("@StudentId",ID));
+                parameters.Add(new SqlParameter("@GradeScore", result.GradeScore));
                 isResultAdded = ConnectDatabase.InsertData(resultQuery, parameters);
             }
             return isResultAdded;
@@ -50,6 +51,38 @@ namespace StudentRegistrationSystem.DataAccessLayer
            
             return userIDs;
         }
+        /*
+
+        public Student getStudentResult(Result result,Student student, List<Result> listOfResults)
+        {
+            Student studentResult = null;
+           
+            bool getStudentResult = false;
+
+            string query = @"SELECT Student.*, Score
+FROM Student
+    INNER JOIN(SELECT Student.StudentId, SUM(GradeScore) AS [Score]
+               FROM Student
+                    INNER JOIN Result ON Student.StudentId = Result.StudentId
+               GROUP BY Student.StudentId) StudentScores ON StudentScores.StudentId = @Student.StudentId;";
+
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Student.StudentId", student.StudentId));
+            
+            DataTable resultTable = ConnectDatabase.QueryConditions(query, parameters);
+
+
+            if (resultTable.Rows.Count > 0)
+            {
+                studentResult = new Student();
+                DataRow
+                studentResult.
+            }
+
+            return studentResult;
+        }
+        */
         /*
         public User GetUserByEmail(string email)
         {

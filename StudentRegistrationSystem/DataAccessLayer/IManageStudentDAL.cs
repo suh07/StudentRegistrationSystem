@@ -11,6 +11,7 @@ namespace StudentRegistrationSystem.DataAccessLayer
     {
 
         bool isResultAdded(List<Result> listOfResults, int userId);
+     //   bool getStudentResult(Result result,Student student);
     
       
     }

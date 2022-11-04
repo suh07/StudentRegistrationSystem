@@ -9,7 +9,8 @@ $(function () {
 
 function registerResult() { 
     var resultList = [];
-
+    var gradeScore;
+    /*
     var subjectValue1 = parseInt($("#subject1Name").val());
     var gradeValue1 = $("#subject1Grade").val();
     const result1 = { SubjectId: subjectValue1, SubjectGrade: gradeValue1 };
@@ -24,6 +25,32 @@ function registerResult() {
     var gradeValue3 = $("#subject3Grade").val();
     const result3 = { SubjectId: subjectValue3, SubjectGrade: gradeValue3 };
     resultList.push(result3);
+    */
+    for (let turn = 1; turn < 4; turn++) {
+        var subjectValue = parseInt($("#subject"+turn+"Name").val());
+        var gradeValue = $("#subject" + turn + "Grade").val();
+        if (gradeValue == "A") {
+            gradeScore = 10;
+        }
+         else if (gradeValue == "B") {
+            gradeScore = 8;
+        }
+        else if (gradeValue == "C") {
+            gradeScore = 6;
+        }
+        else if (gradeValue == "D") {
+            gradeScore = 4;
+        }
+        else if (gradeValue == "E") {
+            gradeScore = 2;
+        }
+        else if (gradeValue == "F") {
+            gradeScore = 0;
+        }
+
+        const result = { SubjectId: subjectValue, SubjectGrade: gradeValue, GradeScore: gradeScore };
+        resultList.push(result);
+    }
 
     var data = { Results: resultList };
 
