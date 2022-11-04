@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Net.Mail;
+using System.Reflection;
+using Unity.Policy;
 
 namespace StudentRegistrationSystem.DataAccessLayer
 {
@@ -19,6 +22,7 @@ namespace StudentRegistrationSystem.DataAccessLayer
         {
             User user = null;
             string query = @"SELECT UserId, UserPassword, RoleId FROM Users WHERE EmailAddress=@EmailAddress";
+           
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@EmailAddress", email));
             DataTable result = ConnectDatabase.QueryConditions(query, parameters);
@@ -35,6 +39,22 @@ namespace StudentRegistrationSystem.DataAccessLayer
             }
             return user;
         }
+
+        public bool CheckExistedUser(User user)
+        {
+            string query = @"
+                    SELECT* FROM Student s
+                        INNER JOIN Users u ON s.UserId = u.UserId
+                    WHERE s.NationalId = @NationalId OR s.PhoneNumber = @PhoneNumber OR u.EmailAddress = @EmailAddress";
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@EmailAddress", user.EmailAddress));
+            parameters.Add(new SqlParameter("@PhoneNumber", user.Student.PhoneNumber));
+            parameters.Add(new SqlParameter("@NationalId", user.Student.NationalId));
+            DataTable result = ConnectDatabase.QueryConditions(query, parameters);
+
+            return result.Rows.Count > 0;
+        }
+        /*
         public bool CheckExistedUser(string emailAddress)
         {
             string query = @"SELECT EmailAddress from Users WHERE EmailAddress = @email";
@@ -45,6 +65,7 @@ namespace StudentRegistrationSystem.DataAccessLayer
 
             return result.Rows.Count > 0;
         }
+        */
         public List<User> GetAllUser(User user)
         {
             List<User> userList = null;

@@ -29,7 +29,8 @@ namespace StudentRegistrationSystem.BusinessLogic
         }
         public bool AddUser(User user)
         {
-            bool userExists = _manageUserDAL.CheckExistedUser(user.EmailAddress);
+            //bool userExists = _manageUserDAL.CheckExistedUser(user.EmailAddress);
+            bool userExists = _manageUserDAL.CheckExistedUser(user);
             if (!userExists)
             {
                 _manageUserDAL.AddUserDB(user);
