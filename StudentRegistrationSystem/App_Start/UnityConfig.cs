@@ -22,7 +22,7 @@ namespace StudentRegistrationSystem
             container.RegisterType<IManageStudent, ManageStudent>();
             container.RegisterType<IConnectDatabase, ConnectDatabase>();
             container.RegisterType<IManageStudentDAL, ManageStudentDAL>();
-
+            container.RegisterType<IAdminAccess, AdminAccess>();
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

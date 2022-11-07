@@ -11,10 +11,10 @@ namespace StudentRegistrationSystem.Controllers
     public class AdminController : Controller
     {
 
-        private readonly IManageStudent _manageStudent;
-        public AdminController(IManageStudent manageStudent)
+        private readonly IAdminAccess _adminAccess;
+        public AdminController(IAdminAccess adminaccess)
         {
-            _manageStudent = manageStudent;
+            _adminAccess = adminaccess;
         }
         // GET: Admin
         public ActionResult AdminIndex()
@@ -33,5 +33,13 @@ namespace StudentRegistrationSystem.Controllers
 
         }
         */
+        [HttpGet]
+        public JsonResult GetStudentInfo()
+        {
+
+            var response = _adminAccess.GetTopFifteenStudent();
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
     }
 }

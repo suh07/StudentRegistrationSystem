@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Data;
+using System.Diagnostics;
+using System.Collections;
 
 namespace StudentRegistrationSystem.DataAccessLayer
 {
@@ -19,6 +21,7 @@ namespace StudentRegistrationSystem.DataAccessLayer
         {
             ConnectDatabase = connectDatabase;
         }
+
         public bool isResultAdded(List<Result> listOfResults, int userId)
         {
             int ID = getStudentId(userId);
@@ -51,6 +54,42 @@ namespace StudentRegistrationSystem.DataAccessLayer
            
             return userIDs;
         }
+
+
+        public List<Student> GetStudentsWithResultInformation()
+        {
+            List<Student> students = new List<Student>();
+
+            string getStudentResultQuery = @"SELECT Student.*, Score
+FROM Student
+    INNER JOIN(SELECT Student.StudentId, SUM(GradeScore) AS [Score]
+               FROM Student
+                    INNER JOIN Result ON Student.StudentId = Result.StudentId
+               GROUP BY Student.StudentId) StudentScores ON StudentScores.StudentId = Student.StudentId;";
+
+
+            DataTable result = ConnectDatabase.QueryConditions(getStudentResultQuery, null);
+
+
+            if (result.Rows.Count > 0)
+            {
+                Student student = null;
+                for (int i = 0; i < result.Rows.Count; i++)
+                {
+                    student=new Student();
+                    DataRow row = result.Rows[i];
+                    int studentId = (int)row["StudentId"];
+
+                    student.StudentId = studentId;
+                    student.FirstName = row["FirstName"].ToString();
+                    student.LastName = row["LastName"].ToString();
+                    student.TotalPoints = Convert.ToInt32(row["Score"]);
+                    students.Add(student);
+                    
+                }
+            }
+            return students;
+        }
         /*
 
         public Student getStudentResult(Result result,Student student, List<Result> listOfResults)
@@ -59,7 +98,7 @@ namespace StudentRegistrationSystem.DataAccessLayer
            
             bool getStudentResult = false;
 
-            string query = @"SELECT Student.*, Score
+            string getStudentResultQuery = @"SELECT Student.*, Score
 FROM Student
     INNER JOIN(SELECT Student.StudentId, SUM(GradeScore) AS [Score]
                FROM Student

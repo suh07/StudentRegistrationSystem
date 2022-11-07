@@ -19,6 +19,7 @@ namespace StudentRegistrationSystem.Models
         public string StudentStatus { get; set; }
         public List<Subject> subjects { get; set; }
         public List<Result> result { get; set; }
+        public int TotalPoints { get; set; }
         public Student()
         {
             result = new List<Result>();

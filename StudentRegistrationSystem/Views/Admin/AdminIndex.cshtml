@@ -7,6 +7,9 @@
 <html>
 <head>
 
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Form</title>
     <!--Google Font-->
@@ -16,25 +19,24 @@
     <link rel="stylesheet" href="~/Scripts/css/HomePage.css">
     <link rel="stylesheet" href="~/Scripts/css/Navbar.css">
     <!--JS-->
-    <script type="text/javascript" src="~/Scripts/js/RegisterScript.js"></script>
+    <script type="text/javascript" src="~/Scripts/js/ResultScript.js"></script>
 
 </head>
 <body>
-    <h1>ADMIN PAGE</h1>
+    <h1 id="AdminTitle">ADMIN PAGE</h1>
     <ul>
-        <li><a class="active" href="/HomePage/HomePageIndex">Home</a></li>
+        <li><a  href="/HomePage/HomePageIndex">Home</a></li>
         <li><a href="@Url.Action("Logout", "Login")">Logout</a></li>
-        <li><a href="/Admin/AdminIndex">Admin Section</a></li>
+        <li><a class="active" href="/Admin/AdminIndex">Admin Section</a></li>
     </ul>
 
 
-    <div class="container">
+    <div class="SummaryTable" style="overflow-x:auto;">
         <table id="studentInfoTable">
             <tr>
                 <th>Student Id</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Email Address</th>
                 <th>Total Mark</th>
                 <th>Status</th>
             </tr>

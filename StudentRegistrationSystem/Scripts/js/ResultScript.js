@@ -1,59 +1,62 @@
-﻿window.onload = function () {
-    DisplayStudentInfo().then((response) => {
-        var table = document.getElementById('studentInfoTable');
-        for (var i = 0; i < response.length; i++) {
-            var tr = document.createElement('tr');
-            var data = response[i];
-            var dateFormat = new Date(parseInt(data.DateOfBirth.substr(6)))
+﻿
+$(function () {
+    GetSummary();
+});
 
+function GetSummary() {
 
-
-            var td = document.createElement('td');
-            td.innerHTML = data.StudentId;
-            tr.appendChild(td);
-
-
-            var td = document.createElement('td');
-            td.innerHTML = data.FirstName;
-            tr.appendChild(td);
-
-
-
-            var td = document.createElement('td');
-            td.innerHTML = data.LastName;
-            tr.appendChild(td);
-
-
-
-            var td = document.createElement('td');
-            td.innerHTML = data.EmailAddress;
-            tr.appendChild(td);
-
-
-            var td = document.createElement('td');
-            td.innerHTML = data.TotalMark;
-            tr.appendChild(td);
-
-
-
-            table.appendChild(tr);
+    getData().then((response) => {
+        if (response) {
+            console.log(response);
+            summaryTable(response);
         }
-    })
-        .catch((error) => {
-            toastr.error('Unable to make request!!');
-        });
-};
 
-
-
-
-function DisplayStudentInfo() {
-    return fetch("/Admin/GetStudentInfo", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    })
-        .then(response => { return response.json(); })
-        .catch((error) => console.log(error))
+    }).catch((error) => {
+        console.error(error);
+        toastr.error('');
+    });
 }
+
+
+function getData() {
+
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: "GET",
+            url: "/Admin/GetStudentInfo",
+            data: null,
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                resolve(data)
+            },
+            error: function (error) {
+                reject(error)
+            }
+        })
+    });
+
+}
+function summaryTable(studentSummary) {
+    var table = $("table#studentInfoTable");
+    var tbody = "";
+    if (studentSummary) {
+        for (var indexStudent = 0; indexStudent < studentSummary.length; indexStudent++) {
+
+            tbody += `<tr>
+                           
+                            <td>${studentSummary[indexStudent].StudentId}</td>
+                            <td>${studentSummary[indexStudent].FirstName}</td>
+                            <td>${studentSummary[indexStudent].LastName}</td>
+                            <td>${studentSummary[indexStudent].TotalPoints}</td>
+                            <td>${studentSummary[indexStudent].StudentStatus}</td>
+                            </tr>`;
+
+        }
+    }
+    else {
+        tbody = "<tr colspan='7'>No students found</tr>";
+    }
+    table.append(tbody);
+}
+

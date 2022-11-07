@@ -164,6 +164,7 @@
     <Compile Include="DataAccessLayer\ManageStudentDAL.cs" />
     <Compile Include="DataAccessLayer\ManageUserDAL.cs" />
     <Compile Include="Models\Result.cs" />
+    <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Role.cs" />
