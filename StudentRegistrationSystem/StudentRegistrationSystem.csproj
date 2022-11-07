@@ -202,6 +202,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\ApplicationScript.js" />
+    <Content Include="Scripts\js\csvScript.js" />
     <Content Include="Scripts\js\loginScript.js" />
     <Content Include="Scripts\js\Register.js" />
     <Content Include="Scripts\js\RegisterScript.js" />
