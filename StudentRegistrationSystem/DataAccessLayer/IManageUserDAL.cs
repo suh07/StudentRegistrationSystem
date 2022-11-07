@@ -9,9 +9,7 @@ namespace StudentRegistrationSystem.DataAccessLayer
     public interface IManageUserDAL
     {
         User GetUserByEmail(string email);
-        List<User> GetAllUser(User user);
         bool AddUserDB(User user);
-        // bool CheckExistedUser(string EmailAddress);
         bool CheckExistedUser(User user);
     }
 }

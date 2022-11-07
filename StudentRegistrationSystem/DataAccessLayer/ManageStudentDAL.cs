@@ -83,25 +83,5 @@ FROM Student
             return studentResult;
         }
         */
-        /*
-        public User GetUserByEmail(string email)
-        {
-            
-            string query = @"SELECT StudentId FROM Users WHERE UserId=@UserId";
-            List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@EmailAddress", email));
-            DataTable result = ConnectDatabase.QueryConditions(query, parameters);
-
-            if (result.Rows.Count > 0)
-            {
-                DataRow row = result.Rows[0];
-                user = new User();
-                user.UserId = (int)row["UserId"];
-                user.EmailAddress = email;
-                user.UserPassword = row["UserPassword"].ToString();
-            }
-            return user;
-        }
-        */
     }
 }

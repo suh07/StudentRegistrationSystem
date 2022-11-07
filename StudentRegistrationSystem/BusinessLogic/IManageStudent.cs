@@ -9,8 +9,6 @@ namespace StudentRegistrationSystem.BusinessLogic
 {
     public interface IManageStudent
     {
-        string GetEnrollmentStatus();
-        string GetStudentResult();
         bool AddStudentResult(List<Result> result, int userId);
     }
 }

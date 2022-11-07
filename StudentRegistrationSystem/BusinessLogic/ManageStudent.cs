@@ -24,14 +24,5 @@ namespace StudentRegistrationSystem.BusinessLogic
             return isResultAdded;
         }
 
-        public string GetEnrollmentStatus()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetStudentResult()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
