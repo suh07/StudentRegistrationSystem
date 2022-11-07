@@ -25,7 +25,6 @@ namespace StudentRegistrationSystem.Models
             result = new List<Result>();
         }
     }
-
     public class ResultModel
     {
         public Result[] Results { get; set; }

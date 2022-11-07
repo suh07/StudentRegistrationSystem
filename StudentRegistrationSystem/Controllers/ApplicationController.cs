@@ -11,27 +11,19 @@ namespace StudentRegistrationSystem.Controllers
 {
     public class ApplicationController : Controller
     {
-        private readonly IManageStudent _ManageStudent;
+        private readonly IManageStudent _manageStudent;
         public ApplicationController(IManageStudent manageStudent)
         {
-            _ManageStudent = manageStudent;
+            _manageStudent = manageStudent;
         }
         public ActionResult ApplicationIndex()
         {
-            //int ses = (int)Session["userId"];
-
-           /*
-           if (Session["userId"] == null)
-            {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.Unauthorized);
-            }
-            */
             return View();
         }
         [HttpPost]
         public JsonResult AddStudentResult(ResultModel result)
         {
-            var response = _ManageStudent.AddStudentResult(new List<Result>(result.Results), (int)Session["userId"]);
+            var response = _manageStudent.AddStudentResult(new List<Result>(result.Results), (int)Session["userId"]);
             return Json(new { result = response, url = "/HomePage/HomePageIndex" });
         }
     }

@@ -14,7 +14,6 @@ namespace StudentRegistrationSystem.Controllers
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.Unauthorized);
             }
-
             return View();
         }
     }

@@ -11,7 +11,6 @@ namespace StudentRegistrationSystem.DataAccessLayer
     public interface IConnectDatabase
     {
         DataTable QueryConditions(string query, List<SqlParameter> parameters);
-        DataTable GetUserDetails(string GetUserQuery);
-       bool InsertData(string query, List<SqlParameter> parameters);
+        bool InsertData(string query, List<SqlParameter> parameters);
     }
 }

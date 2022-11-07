@@ -6,7 +6,6 @@ namespace StudentRegistrationSystem.BusinessLogic
     public class ManageUser : IManageUser
     {
         private readonly IManageUserDAL _manageUserDAL;
-
         public ManageUser(IManageUserDAL managerUserDAL)
         {
             _manageUserDAL = managerUserDAL;
@@ -19,12 +18,10 @@ namespace StudentRegistrationSystem.BusinessLogic
             {
                 return null;
             }
-
             if (!BCrypt.Net.BCrypt.Verify(model.UserPassword, user.UserPassword))
             {
                 return null;
             }
-
             return user;
         }
         public bool AddUser(User user)

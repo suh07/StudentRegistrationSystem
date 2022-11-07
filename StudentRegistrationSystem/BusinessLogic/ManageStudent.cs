@@ -8,19 +8,15 @@ namespace StudentRegistrationSystem.BusinessLogic
 
     public class ManageStudent : IManageStudent
     {
-        private readonly IManageStudentDAL _ManageStudentDAL;
-
-        public ManageStudent(IManageStudentDAL ManageStudentDAL)
+        private readonly IManageStudentDAL _manageStudentDAL;
+        public ManageStudent(IManageStudentDAL manageStudentDAL)
         {
-            _ManageStudentDAL = ManageStudentDAL;
+            _manageStudentDAL = manageStudentDAL;
         }
         public bool AddStudentResult(List<Result> resultList, int userId)
         {
             bool isResultAdded = false;
-
-                isResultAdded = _ManageStudentDAL.isResultAdded(resultList, userId);
-      
-
+                isResultAdded = _manageStudentDAL.isResultAdded(resultList, userId);
             return isResultAdded;
         }
 

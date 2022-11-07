@@ -14,7 +14,6 @@ namespace StudentRegistrationSystem.Models
         public string UserPassword { get; set; }
         public Student Student { get; set; }
     }
-
     public class LoginModel
     {
         public string EmailAddress { get; set; }

@@ -6,6 +6,5 @@ namespace StudentRegistrationSystem.BusinessLogic
     {
         User Authenticate(LoginModel model);
         bool AddUser(User User);
-
     }
 }

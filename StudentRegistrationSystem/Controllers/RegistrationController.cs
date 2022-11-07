@@ -24,7 +24,6 @@ namespace StudentRegistrationSystem.Controllers
         public JsonResult AddUser(User User)
         {
             bool userAdded = _manageUser.AddUser(User);
-
             return Json(new { result = userAdded, url = Url.Action("LoginIndex", "Login") });
         }
     }

@@ -9,17 +9,12 @@ namespace StudentRegistrationSystem.BusinessLogic
 {
     public class AdminAccess : IAdminAccess
     {
-
-
         private readonly IManageStudentDAL _manageStudentDAL;
-
         public AdminAccess(IManageStudentDAL managerStudentDAL)
         {
             _manageStudentDAL = managerStudentDAL;
         }
-
         public object StudentStatus { get; private set; }
-
         public List<Student> GetTopFifteenStudent()
         {
             List<Student> students = _manageStudentDAL.GetStudentsWithResultInformation();
@@ -29,11 +24,9 @@ namespace StudentRegistrationSystem.BusinessLogic
             {
                 sortedListStudents = students.OrderByDescending(stud => stud.TotalPoints).ToList();
                 sortedListStudentsWihPoints = assignStatusToAllStudent(sortedListStudents);
-
             }
             return sortedListStudentsWihPoints;
         }
-
         private List<Student> assignStatusToAllStudent(List<Student> students)
         {
             if (students != null)
@@ -56,11 +49,9 @@ namespace StudentRegistrationSystem.BusinessLogic
                         students[count] = setStatus(students[count], false);
                     }
                 }
-            }
-           
+            }         
             return students;
-        }
-           
+        }         
         private Student setStatus(Student studs, bool waiting)
         {
             if(studs != null)
@@ -71,7 +62,6 @@ namespace StudentRegistrationSystem.BusinessLogic
                     {
                         studs.StudentStatus = Status.Rejected.ToString();
                     }
-
                     else
                     {
                         studs.StudentStatus=Status.Waiting.ToString();
@@ -83,7 +73,6 @@ namespace StudentRegistrationSystem.BusinessLogic
                     {
                         studs.StudentStatus = Status.Rejected.ToString();
                     }
-
                     else
                     {
                         studs.StudentStatus = Status.Approved.ToString();
@@ -91,7 +80,6 @@ namespace StudentRegistrationSystem.BusinessLogic
                 }
 
             }
-
             return studs;
         }
     }

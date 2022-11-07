@@ -1,6 +1,4 @@
-﻿
-
-*,
+﻿*,
 *:before,
 *:after {
     padding: 0;
@@ -105,7 +103,7 @@ button {
     border-radius: 3px;
 }
     
-/*New CSS*/
+/*Table CSS*/
 
 table {
     border-collapse: collapse;

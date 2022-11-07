@@ -10,23 +10,19 @@ using System.Collections;
 
 namespace StudentRegistrationSystem.DataAccessLayer
 {
-   
     public class ManageStudentDAL : IManageStudentDAL
     {
         private const string resultQuery = @"INSERT INTO Result ([SubjectId],[SubjectGrade],[StudentId],[GradeScore]) VALUES (@SubjectId,@SubjectGrade,@StudentId,@GradeScore)";
         private readonly IConnectDatabase ConnectDatabase;
         private int userIDs;
-
         public ManageStudentDAL(IConnectDatabase connectDatabase)
         {
             ConnectDatabase = connectDatabase;
         }
-
         public bool isResultAdded(List<Result> listOfResults, int userId)
         {
             int ID = getStudentId(userId);
             bool isResultAdded = false;
-
             foreach (var result in listOfResults)
             {
                 List<SqlParameter> parameters = new List<SqlParameter>();
@@ -37,8 +33,7 @@ namespace StudentRegistrationSystem.DataAccessLayer
                 isResultAdded = ConnectDatabase.InsertData(resultQuery, parameters);
             }
             return isResultAdded;
-        }
-        
+        }     
         private int getStudentId(int userID)
         {
             string query = @"SELECT StudentId FROM Student WHERE UserId=@UserId";
@@ -50,27 +45,19 @@ namespace StudentRegistrationSystem.DataAccessLayer
                 {
                     DataRow row = result.Rows[0];
                      userIDs = (int)row["StudentId"];
-                }
-           
+                }          
             return userIDs;
         }
-
-
         public List<Student> GetStudentsWithResultInformation()
         {
             List<Student> students = new List<Student>();
-
             string getStudentResultQuery = @"SELECT Student.*, Score
-FROM Student
-    INNER JOIN(SELECT Student.StudentId, SUM(GradeScore) AS [Score]
-               FROM Student
-                    INNER JOIN Result ON Student.StudentId = Result.StudentId
-               GROUP BY Student.StudentId) StudentScores ON StudentScores.StudentId = Student.StudentId;";
-
-
+                                            FROM Student
+                                                INNER JOIN(SELECT Student.StudentId, SUM(GradeScore) AS [Score]
+                                                           FROM Student
+                                                                INNER JOIN Result ON Student.StudentId = Result.StudentId
+                                                GROUP BY Student.StudentId) StudentScores ON StudentScores.StudentId = Student.StudentId;";
             DataTable result = ConnectDatabase.QueryConditions(getStudentResultQuery, null);
-
-
             if (result.Rows.Count > 0)
             {
                 Student student = null;
@@ -84,43 +71,10 @@ FROM Student
                     student.FirstName = row["FirstName"].ToString();
                     student.LastName = row["LastName"].ToString();
                     student.TotalPoints = Convert.ToInt32(row["Score"]);
-                    students.Add(student);
-                    
+                    students.Add(student);                   
                 }
             }
             return students;
         }
-        /*
-
-        public Student getStudentResult(Result result,Student student, List<Result> listOfResults)
-        {
-            Student studentResult = null;
-           
-            bool getStudentResult = false;
-
-            string getStudentResultQuery = @"SELECT Student.*, Score
-FROM Student
-    INNER JOIN(SELECT Student.StudentId, SUM(GradeScore) AS [Score]
-               FROM Student
-                    INNER JOIN Result ON Student.StudentId = Result.StudentId
-               GROUP BY Student.StudentId) StudentScores ON StudentScores.StudentId = @Student.StudentId;";
-
-
-            List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Student.StudentId", student.StudentId));
-            
-            DataTable resultTable = ConnectDatabase.QueryConditions(query, parameters);
-
-
-            if (resultTable.Rows.Count > 0)
-            {
-                studentResult = new Student();
-                DataRow
-                studentResult.
-            }
-
-            return studentResult;
-        }
-        */
     }
 }

@@ -39,31 +39,6 @@ namespace StudentRegistrationSystem.DataAccessLayer
                             command.Parameters.Add(parameter);
                         }
                     }
-
-                    using (SqlDataAdapter sqlData = new SqlDataAdapter(command))
-                    {
-                        sqlData.Fill(data);
-                    }
-                }
-            }
-            catch (Exception Error)
-            {
-                //logger.LogInfo(Error);
-                throw Error;
-            }
-            CloseConnection();
-            return data;
-        }
-
-        public DataTable GetUserDetails(string GetUserQuery)
-        {
-            OpenConnection();
-            DataTable data = new DataTable();
-            try
-            {
-                using (SqlCommand command = new SqlCommand(GetUserQuery, connection))
-                {
-                    command.CommandType = CommandType.Text;
                     using (SqlDataAdapter sqlData = new SqlDataAdapter(command))
                     {
                         sqlData.Fill(data);
@@ -77,7 +52,6 @@ namespace StudentRegistrationSystem.DataAccessLayer
             CloseConnection();
             return data;
         }
-
         public bool InsertData(string query, List<SqlParameter> parameters)
         {
             OpenConnection();
