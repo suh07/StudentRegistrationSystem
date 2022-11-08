@@ -66,7 +66,6 @@ namespace StudentRegistrationSystem.DataAccessLayer
                     student=new Student();
                     DataRow row = result.Rows[i];
                     int studentId = (int)row["StudentId"];
-
                     student.StudentId = studentId;
                     student.FirstName = row["FirstName"].ToString();
                     student.LastName = row["LastName"].ToString();

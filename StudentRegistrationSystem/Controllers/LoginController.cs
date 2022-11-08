@@ -38,7 +38,7 @@ namespace StudentRegistrationSystem.Controllers
                 return Json(new { result = true, url = "/Admin/AdminIndex" });
             }
             Session["userId"] = user.UserId;
-            return Json(new { result = true, url = "/Login/LoginIndex" });
+            return Json(new { result = true, url = "/Registration/RegistrationIndex" });
         }
         [HttpGet]
         public ActionResult Logout()
