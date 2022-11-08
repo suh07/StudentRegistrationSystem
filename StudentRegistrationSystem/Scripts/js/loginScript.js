@@ -18,7 +18,7 @@ function signIn() {
            window.location = response.url;
         }
         else {
-            toastr.error('Unable to Authenticate user');
+            toastr.error('Email Address or Password invalid');
             return false;
         }
     })

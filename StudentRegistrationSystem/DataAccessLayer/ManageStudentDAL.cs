@@ -12,7 +12,7 @@ namespace StudentRegistrationSystem.DataAccessLayer
 {
     public class ManageStudentDAL : IManageStudentDAL
     {
-        private const string resultQuery = @"INSERT INTO Result ([SubjectId],[SubjectGrade],[StudentId],[GradeScore]) VALUES (@SubjectId,@SubjectGrade,@StudentId,@GradeScore)";
+        private const string InserResultQuery = @"INSERT INTO Result ([SubjectId],[SubjectGrade],[StudentId],[GradeScore]) VALUES (@SubjectId,@SubjectGrade,@StudentId,@GradeScore)";
         private readonly IConnectDatabase ConnectDatabase;
         private int userIDs;
         public ManageStudentDAL(IConnectDatabase connectDatabase)
@@ -30,7 +30,7 @@ namespace StudentRegistrationSystem.DataAccessLayer
                 parameters.Add(new SqlParameter("@SubjectGrade",result.SubjectGrade));
                 parameters.Add(new SqlParameter("@StudentId",ID));
                 parameters.Add(new SqlParameter("@GradeScore", result.GradeScore));
-                isResultAdded = ConnectDatabase.InsertData(resultQuery, parameters);
+                isResultAdded = ConnectDatabase.InsertData(InserResultQuery, parameters);
             }
             return isResultAdded;
         }     

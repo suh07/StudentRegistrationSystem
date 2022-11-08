@@ -30,7 +30,6 @@ function createCSV(studentList) {
             }
         }
 
-        //console.log(listApproved);
 
         var headers = "Approved, Rejected, Waiting\n";
         var data = "";
@@ -65,10 +64,6 @@ function createCSV(studentList) {
         hiddenElement.click();
 
     }
-
-
-
-
 }
 
 function GetSummary() {

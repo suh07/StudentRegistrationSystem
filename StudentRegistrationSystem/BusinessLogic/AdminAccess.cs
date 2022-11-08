@@ -19,13 +19,13 @@ namespace StudentRegistrationSystem.BusinessLogic
         {
             List<Student> students = _manageStudentDAL.GetStudentsWithResultInformation();
             List<Student> sortedListStudents = null;
-            List<Student> sortedListStudentsWihPoints = null;
+            List<Student> sortedListStudentsWihStatus = null;
             if (students != null)
             {
                 sortedListStudents = students.OrderByDescending(stud => stud.TotalPoints).ToList();
-                sortedListStudentsWihPoints = assignStatusToAllStudent(sortedListStudents);
+                sortedListStudentsWihStatus = assignStatusToAllStudent(sortedListStudents);
             }
-            return sortedListStudentsWihPoints;
+            return sortedListStudentsWihStatus;
         }
         private List<Student> assignStatusToAllStudent(List<Student> students)
         {
